@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./layout/header/Header";
+import SideBar from "./layout/sidebar/SideBar";
+import "./App.css";
+
+import MainPage from "./pages/mainpage/MainPage";
+
+
 
 function App() {
+  function adminList() {
+    let items = JSON.parse(localStorage.getItem("admin"));
+    if (items) {
+      return JSON.parse(localStorage.getItem("admin"));
+    } else {
+      return [];
+    }
+  }
+  console.log(adminList()  , "()<==")
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div>
+      <Header />
+
+      <div className="content">
+
+        {
+          adminList().length>=1 ?<SideBar />:""
+        }
+        
+        <MainPage />
+      </div>
     </div>
+  
+    </>
   );
 }
 
