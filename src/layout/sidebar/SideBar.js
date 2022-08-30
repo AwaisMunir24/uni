@@ -36,8 +36,9 @@ const SideBar = () => {
           </div>
           <ul className="navigation_list">
             {Menus.map((e, idx) => (
-              <Link to={e.path}>
-              <li key={idx}>
+            
+              <Link to={e.path} key={idx}>
+              <li>
                 {e.icon}
                 <span className={`${!open && "hidden"}`}>{e.title}</span>
               </li>

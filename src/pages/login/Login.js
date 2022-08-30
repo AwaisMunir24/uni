@@ -4,7 +4,7 @@ import { Link ,useNavigate} from "react-router-dom";
 
 import "./Login.css";
 const Login = () => {
-  const navigate=useNavigate();
+  
   function adminList(){
       let items =JSON.parse (localStorage.getItem('admin'));
       if (items) {
@@ -35,8 +35,8 @@ const Login = () => {
         
     ]
     setAdmin(newAdmin);
-    console.log(admin)
-    navigate('/dashboard');
+    console.log(newAdmin)
+    // navigate('/dashboard');
   };
 
   return (

@@ -25,8 +25,8 @@
 
 .student_records .userButton {
     border: none;
-    width: 120px;
-    height: 30px;
+    padding: 5px 30px;
+    text-decoration: none !important;
     background: #3B9AE1;
     color: white;
     border-radius: 10px;
@@ -36,9 +36,20 @@
     background: black;
     color: #fff;
 }
-.student_records td{
+
+.student_records td {
     padding-left: 0px !important;
 }
-.user_record_setting{
-    padding:15px 0px !important;
+
+.user_record_setting {
+    padding: 15px 0px !important;
+}
+
+.select_option {
+    font-family: 'Poppins', sans-serif;
+    padding: 5px !important;
+    width: 50% !important;
+    margin: auto;
+    font-size: 14px !important;
+
 }

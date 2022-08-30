@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 const Users = (props) => {
-  const { image,userName,location ,phone,btnTitle,icons} = props;
+  const { image, userName, location, phone, btnTitle } = props;
   return (
     <>
       <tr>
@@ -12,13 +12,24 @@ const Users = (props) => {
           </div>{" "}
         </td>
 
-        <td className="user_record_setting"><h5 className="location">{location}</h5></td>
-        <td className="user_record_setting"><h5 className="phone">{phone}</h5></td>
         <td className="user_record_setting">
-          <button  className="userButton">{btnTitle}</button>
+          <h5 className="location">{location}</h5>
         </td>
         <td className="user_record_setting">
-          <a href="#">{icons}</a>
+          <h5 className="phone">{phone}</h5>
+        </td>
+        <td className="user_record_setting">
+          <a href="mailto:someone@example.com" className="userButton" >{btnTitle}</a>
+        </td>
+        <td className="user_record_setting">
+          <select
+            className="form-select form-select-lg mb-0 select_option"
+            aria-label=".form-select-lg example"
+          >
+            <option selected className="">Select Status</option>
+            <option value="blocked">Blocked</option>
+            <option value="notblocked">Not Blocked</option>
+            </select>
         </td>
       </tr>
     </>
