@@ -1,8 +1,10 @@
 import React, { Component, useEffect, useState } from "react";
 import Input from "../../components/input/Input";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
+
 import "./Login.css";
 const Login = () => {
+  const navigate=useNavigate();
   function adminList(){
       let items =JSON.parse (localStorage.getItem('admin'));
       if (items) {
@@ -23,6 +25,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    // navigate('/dashboard');
     const newAdmin=[
         ...admin,{
             userName,
@@ -32,6 +35,8 @@ const Login = () => {
         
     ]
     setAdmin(newAdmin);
+    console.log(admin)
+    navigate('/dashboard');
   };
 
   return (

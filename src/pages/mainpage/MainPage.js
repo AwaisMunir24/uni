@@ -3,7 +3,7 @@ import Login from "../login/Login";
 import Students from "../students/Students";
 import Home from "../home/Home";
 import Teachers from "../teachers/Teachers";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 const MainPage = () => {
   function adminList() {
@@ -29,7 +29,6 @@ const MainPage = () => {
     <>
       <div className="context">
         <Routes>
-          <Route path="logout" element={<Home />} />
           <Route path="/" element={<Login />} />
           <Route path="students" element={<Students />} />
           <Route path="teachers" element={<Teachers />} />
