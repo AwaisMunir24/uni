@@ -1,22 +1,15 @@
 import React, { Component, useEffect, useState } from "react";
-import TeacherForm from "../../components/teachers/TeacherForm";
+import TeacherForm, {
+  TeacherList,
+} from "../../components/teachers/TeacherForm";
 import TeacherTable from "../../components/Teachertable/TeacherTable";
-import './Teachers.css'
+import "./Teachers.css";
 const Teachers = () => {
-  function TeacherList() {
-    let items = JSON.parse(localStorage.getItem("teacherRecord"));
-    if (items) {
-      return JSON.parse(localStorage.getItem("teacherRecord"));
-    } else {
-      return [];
-    }
-  }
-  const[teacherLists,setTeacherLists]=useState(TeacherList());
-  
+  const [teacherLists, setTeacherLists] = useState(TeacherList);
 
-  useEffect(()=>{
-    
-  },[teacherLists])
+  const checngest = () => {
+    setTeacherLists(TeacherList);
+  };
 
   return (
     <>
@@ -52,6 +45,7 @@ const Teachers = () => {
                   role="tab"
                   aria-controls="ex1-tabs-2"
                   aria-selected="false"
+                  onClick={checngest}
                 >
                   View Teacher List
                 </a>
@@ -78,30 +72,36 @@ const Teachers = () => {
                 <div className="col-lg-12">
                   <table className="table teacher-tables">
                     <thead>
-                      <th scope="col">#</th>
-                      <th scope="col">Image</th>
-                      <th scope="col">Teacher Name</th>
-                      <th scope="col">CNIC #</th>
-                      <th scope="col">Last Qualification</th>
-                      <th scope="col">Course</th>
-                      <th scope="col">Passcode</th>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Teacher Name</th>
+                        <th scope="col">CNIC #</th>
+                        <th scope="col">Last Qualification</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Passcode</th>
+                        <th scope="col">Status</th>
+                      </tr>
                     </thead>
+
                     <tbody>
-                      {
-                        teacherLists.map((e,idx)=>
+                      {teacherLists.map((e, idx) => (
                         <TeacherTable
-                        key={idx}
-                        id={e.id}
-                        teacherprofile={e.image}
-                        teachername={e.teacherName}
-                        cnic={e.teaherCnic}
-                        qualification={e.qualification}
-                        course={e.course}
-                        passcode={e.passcode}
+                          key={idx}
+                          id={e.id}
+                          teacherprofile={e.image}
+                          teachername={e.teacherName}
+                          cnic={e.teaherCnic}
+                          qualification={e.qualification}
+                          course={e.course}
+                          passcode={e.passcode}
+                          pressDlt={() => {
+                            setTeacherLists(
+                              teacherLists.filter((ele) => ele.id !== e.id)
+                            );
+                          }}
                         />
-                        
-                        )
-                      }
+                      ))}
                     </tbody>
                   </table>
                 </div>

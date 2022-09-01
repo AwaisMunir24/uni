@@ -1,15 +1,21 @@
 import React, { Component, useEffect, useState } from "react";
 import "./StudentForm.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import NewInput from "../newInput/Newinput";
-const StudentForm = () => {
-  function studentList() {
-    let items = JSON.parse(localStorage.getItem("studentReocrd"));
-    if (items) {
-      return JSON.parse(localStorage.getItem("studentReocrd"));
-    } else {
-      return [];
-    }
+
+function studentList() {
+  let items = JSON.parse(localStorage.getItem("studentReocrd"));
+  if (items) {
+    return JSON.parse(localStorage.getItem("studentReocrd"));
+  } else {
+    return [];
   }
+}
+
+
+const StudentForm = () => {
+ 
 
   const [studentName, setStudentName] = useState("");
   const [father, setFather] = useState("");
@@ -41,7 +47,26 @@ const StudentForm = () => {
         password,
       },
     ];
+ 
+    if (studentName == " " || father == " "|| cnic =="" || image =="" || address=="" ||age=="" ||regId==""||password=="" ) {
+      toast.warning("Teacher Data Not Added !", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    } else {
+      toast.success("Teacher Data Added Successfully !", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    }
     setStudentRecord(newStudentList);
+    setStudentName("");
+    setFather("");
+    cnic("");
+    image("");
+    setAddress("");
+    setRegid("");
+    setPassword("");
   };
   useEffect(() => {
     localStorage.setItem("studentReocrd", JSON.stringify(studentReocrd));
@@ -135,7 +160,9 @@ const StudentForm = () => {
           <button className="student_button">Save Student Record</button>
         )}
       </form>
+      <ToastContainer />
     </>
   );
 };
 export default StudentForm;
+export{studentList};

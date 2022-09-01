@@ -1,67 +1,86 @@
 import React, { Component, useEffect, useState } from "react";
-import Button from "../button/Button";
 import NewInput from "../newInput/Newinput";
-import "./TeacherForm.css";
-const TeacherForm = () => {
-  function TeacherList() {
-    let items = JSON.parse(localStorage.getItem("teacherRecord"));
-    if (items) {
-      return JSON.parse(localStorage.getItem("teacherRecord"));
-    } else {
-      return [];
-    }
-  }
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./TeacherForm.css";
+
+function TeacherList() {
+  let items = localStorage.getItem("newState");
+  if (items) {
+    return JSON.parse(items);
+  } else {
+    return [];
+  }
+}
+
+const TeacherForm = () => {
   const [teacherName, setTeacherName] = useState("");
   const [teaherCnic, setTeacherCnic] = useState("");
   const [passcode, setPasscode] = useState("");
   const [qualification, setQualification] = useState("");
   const [course, setCourse] = useState("");
   const [image, setImage] = useState("");
-  const [teacherRecord, setTeacherRecord] = useState(TeacherList());
   const [isUpdating, setIsUpdating] = useState(false);
-
+  const [teachRegId, setTeachRegId] = useState("");
+  const [newState, setNewState] = useState(TeacherList());
   const handleTeacher = (e) => {
     e.preventDefault();
     setIsUpdating(true);
     setTimeout(() => {
-        setIsUpdating(false);
-      }, 2000);
-    const newTeacher = [
-      ...teacherRecord,
+      setIsUpdating(false);
+    }, 2000);
+
+    const newTeacherList = [
+      ...newState,
       {
-        id: teacherRecord.length + 1,
+        id: newState.length + 1,
         teacherName,
         teaherCnic,
-        passcode,
         qualification,
         course,
-        image,
+        passcode,
+        image
       },
     ];
-    setTeacherRecord(newTeacher);
+    if (teacherName == " " || teaherCnic == " "|| qualification =="" || course =="" || passcode=="" ||image=="") {
+      toast.warning("Teacher Data Not Added !", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    } else {
+      toast.success("Teacher Data Added Successfully !", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    }
+
+    console.log("just updating, ", newTeacherList);
+
+    setNewState(newTeacherList);
     setTeacherName("");
     setTeacherCnic("");
-    setPasscode("");
     setQualification("");
     setCourse("");
+    setPasscode("");
+    setTeachRegId("");
     setImage("");
   };
 
-  const imageChangeFunction=(e)=>{
-    setImage(e.target.files[0]);
-   
-  }
-
   useEffect(() => {
-    localStorage.setItem("teacherRecord", JSON.stringify(teacherRecord));
-  }, [teacherRecord]);
+    localStorage.setItem("newState", JSON.stringify(newState));
+    console.log(newState, "<==record");
+    console.log("after update data , ", TeacherList());
+  }, [newState]);
+
+
+
   return (
     <>
       <form onSubmit={handleTeacher} className="text-center">
         <div className="row justify-content-center mt-3">
           <div className="col-lg-5 col-md-5 col-sm-12">
-            <div className="mb-3">
+            <div className="mb-4">
               <NewInput
                 type="text"
                 className="form-control"
@@ -70,7 +89,16 @@ const TeacherForm = () => {
                 onChange={(e) => setTeacherName(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-4">
+              <NewInput
+                type="number"
+                className="form-control"
+                labelName="CNIC"
+                value={teaherCnic}
+                onChange={(e) => setTeacherCnic(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
               <NewInput
                 type="text"
                 className="form-control"
@@ -79,7 +107,33 @@ const TeacherForm = () => {
                 onChange={(e) => setQualification(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-4">
+              <NewInput
+                type="text"
+                className="form-control"
+                labelName="Course"
+                value={course}
+                onChange={(e) => setCourse(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <NewInput
+                type="file"
+                className="form-control"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <NewInput
+                type="text"
+                className="form-control"
+                labelName="Teacher Reg Id"
+                value={teachRegId}
+                onChange={(e) => setTeachRegId(e.target.value)}
+              />
+            </div>
+            <div className="mb-5">
               <NewInput
                 type="text"
                 className="form-control"
@@ -89,44 +143,18 @@ const TeacherForm = () => {
               />
             </div>
           </div>
-          <div className="col-lg-5 col-md-5 col-sm-12">
-            <div className="mb-3">
-              <NewInput
-                type="number"
-                className="form-control"
-                labelName="CNIC"
-                value={teaherCnic}
-                onChange={(e) => setTeacherCnic(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <NewInput
-                type="text"
-                className="form-control"
-                labelName="Course"
-                value={course}
-                onChange={(e) => setCourse(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <NewInput
-                type="file"
-                className="form-control"
-                value={image}
-                onChange={(e)=>setImage(e.target.value)}
-              />
-            </div>
-          </div>
         </div>
         {isUpdating ? (
-        <button className="buttonload student_button">
-          <i className="fa fa-spinner fa-spin"></i>Saving Teacher Data
-        </button>
-      ) : (
-        <button className="student_button">Save Teacher Data</button>
-      )}
+          <button className="buttonload teacher_button">
+            <i className="fa fa-spinner fa-spin"></i>Saving Teacher Data
+          </button>
+        ) : (
+          <button className="teacher_button">Save Teacher Data</button>
+        )}
       </form>
+      <ToastContainer />
     </>
   );
 };
 export default TeacherForm;
+export { TeacherList };

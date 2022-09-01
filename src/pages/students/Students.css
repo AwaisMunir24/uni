@@ -53,3 +53,6 @@
     font-size: 14px !important;
 
 }
+.student_records table th{
+    padding-left: 0px !important;
+}

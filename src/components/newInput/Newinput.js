@@ -5,7 +5,7 @@ const NewInput = (props) => {
     <>
       <div className="form-outline">
         <input type={type} id="form12" className={className} value={value} onChange={onChange} required/>
-        <label className="form-label" for="form12">
+        <label className="form-label" htmlFor="form12">
          {labelName}
         </label>
       </div>

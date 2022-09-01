@@ -1,25 +1,22 @@
 import React, { Component, useState } from "react";
-import profile from "../../assets/image/awais.jpg";
-import Users from "../../components/user/Users";
-import StudentForm ,{studentList} from "../../components/studentform/StudentForm";
-import "./Students.css";
-const Students = () => {
-  const [studentsRecord, setStudentsRecord] = useState(studentList );
+import "./Course.css";
+import CourseForm, { CourseList } from "../../components/courseForm/CourseForm";
+import CourseListing from "../../components/courselist/CourseList";
+const Course = () => {
+  const [courselisting, setCourseListing] = useState(CourseList);
 
-const handleStudentShowData=()=>{
-  setStudentsRecord(studentList);
-}
-
-
+  const CourseShowList = () => {
+    setCourseListing(CourseList);
+  };
 
   return (
     <>
       <section>
-        <div className="student_records">
+        <div className="course_section">
           <div className="container-fluid">
             <div className="row mb-3">
               <div className="col-lg-12">
-                <h4>Students</h4>
+                <h4>Course</h4>
               </div>
             </div>
             <div className="row">
@@ -35,7 +32,7 @@ const handleStudentShowData=()=>{
                     aria-controls="ex1-tabs-1"
                     aria-selected="true"
                   >
-                    Add Student
+                    Course
                   </a>
                 </li>
                 <li className="nav-item" role="presentation">
@@ -47,13 +44,13 @@ const handleStudentShowData=()=>{
                     role="tab"
                     aria-controls="ex1-tabs-2"
                     aria-selected="false"
-                    onClick={handleStudentShowData}
+                    onClick={CourseShowList}
                   >
-                    View Student Lists
+                    Course List
                   </a>
                 </li>
               </ul>
-              {/* <!-- Tabs navs --> */}
+              {/* <!-- Tabs navs -->  */}
 
               {/* <!-- Tabs content --> */}
               <div className="tab-content" id="ex1-content">
@@ -63,7 +60,7 @@ const handleStudentShowData=()=>{
                   role="tabpanel"
                   aria-labelledby="ex1-tab-1"
                 >
-                  <StudentForm/>
+                  <CourseForm />
                 </div>
                 <div
                   className="tab-pane fade"
@@ -75,30 +72,24 @@ const handleStudentShowData=()=>{
                     <table className="table ">
                       <thead>
                         <tr>
-                        <th>id</th>
-                        <th>Student Name</th>
-                        <th>Image</th>
-                        <th>Father Name</th>
-                        <th>CNIC</th>
-                        <th>Address</th>
-                        <th>Age</th>
-                        <th>Student Id</th>
-                        <th>Password</th>
+                          <th>#</th>
+                          <th>Course title</th>
+                          <th>Course Code</th>
+                          <th>Subject Code</th>
+                          <th>Teacher</th>
+                          <th>Credit Hours</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {studentsRecord.map((e, idx) => (
-                          <Users
+                        {courselisting.map((e, idx) => (
+                          <CourseListing
                             key={idx}
                             id={e.id}
-                            image={e.image}
-                            studentName={e.studentName}
-                            fatherName={e.father}
-                            cnic={e.cnic}
-                            address={e.address}
-                            age={e.age}
-                            studentId={e.regId}
-                            password={e.password}
+                            coursetitle={e.title}
+                            coursecode={e.code}
+                            subjectcode={e.subCode}
+                            teacher={e.teacher}
+                            credithours={e.creditHours}
                           />
                         ))}
                       </tbody>
@@ -114,4 +105,4 @@ const handleStudentShowData=()=>{
     </>
   );
 };
-export default Students;
+export default Course;

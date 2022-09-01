@@ -7,22 +7,30 @@ const SideBar = () => {
   const Menus = [
     {
       title: "Dashboard",
-      path: "#",
       icon: <i className="fa-solid fa-boxes-stacked"></i>,
       path: "dashboard",
     },
     {
       title: "Teachers",
-      path: "#",
-      icon: <i className="fa-solid fa-chalkboard-user"></i>,
+     icon: <i className="fa-solid fa-chalkboard-user"></i>,
       path: "teachers",
     },
     {
       title: "Students",
-      path: "#",
       icon: <i className="fa-solid fa-graduation-cap"></i>,
       path: "students",
     },
+    {
+      title: "Course",
+     
+      icon:<i className="fa-solid fa-book"></i>,
+      path: "course",
+    },
+    {
+      title: "Reports",
+      icon:<i className="fa-solid fa-file-lines"></i>,
+      path: "report",
+    }
   ];
   return (
     <>
