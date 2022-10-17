@@ -38,12 +38,12 @@ const CourseForm = () => {
       },
     ];
     if (title == " " || code == " "|| subCode =="" || teacher =="" || creditHours=="") {
-        toast.warning("Teacher Data Not Added !", {
+        toast.warning("Course Data Not Added !", {
           position: "top-center",
           autoClose: 2000,
         });
       } else {
-        toast.success("Teacher Data Added Successfully !", {
+        toast.success("Course Data Added Successfully !", {
           position: "top-center",
           autoClose: 2000,
         });

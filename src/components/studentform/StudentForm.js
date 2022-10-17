@@ -15,7 +15,7 @@ function studentList() {
 
 
 const StudentForm = () => {
- 
+ const [message,setMessage]=useState(false);
 
   const [studentName, setStudentName] = useState("");
   const [father, setFather] = useState("");
@@ -49,11 +49,14 @@ const StudentForm = () => {
     ];
  
     if (studentName == " " || father == " "|| cnic =="" || image =="" || address=="" ||age=="" ||regId==""||password=="" ) {
+      setMessage(true);
       toast.warning("Teacher Data Not Added !", {
         position: "top-center",
         autoClose: 2000,
       });
     } else {
+      setMessage(false);
+   
       toast.success("Teacher Data Added Successfully !", {
         position: "top-center",
         autoClose: 2000,
@@ -67,6 +70,7 @@ const StudentForm = () => {
     setAddress("");
     setRegid("");
     setPassword("");
+ 
   };
   useEffect(() => {
     localStorage.setItem("studentReocrd", JSON.stringify(studentReocrd));
@@ -94,6 +98,7 @@ const StudentForm = () => {
                 value={cnic}
                 onChange={(e) => setCnic(e.target.value)}
               />
+              {message && cnic (<p className="m-0 data studentidd">Please Enter CNIC Number</p>)}
             </div>
             <div className="mb-3">
               <NewInput
